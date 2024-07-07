@@ -23,6 +23,7 @@ io.on('connection', (socket) => {
         if (players[socket.id]) {
             players[socket.id].x += data.dx;
             players[socket.id].y += data.dy;
+            console.log('Player moved:', socket.id, data);
             io.emit('updatePlayers', players);
         }
     });
@@ -30,6 +31,6 @@ io.on('connection', (socket) => {
     io.emit('updatePlayers', players);
 });
 
-server.listen(3000, () => {
-    console.log('Server is running on port 3000');
+server.listen(25565, () => {
+    console.log('Server is running on port 25565');
 });

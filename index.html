@@ -10,12 +10,23 @@
     <canvas id="gameCanvas" width="800" height="600"></canvas>
     <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
     <script>
-        const socket = io('https://your-app-name.herokuapp.com');
+        const socket = io('0.tcp.us-cal-1.ngrok.io:19576');
+        console.log('Connecting to WebSocket...');
+
+        socket.on('connect', () => {
+            console.log('Connected to WebSocket server');
+        });
+
+        socket.on('connect_error', (error) => {
+            console.error('Connection error:', error);
+        });
+
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
         const players = {};
 
         socket.on('updatePlayers', (data) => {
+            console.log('Received updatePlayers:', data);
             Object.assign(players, data);
         });
 
